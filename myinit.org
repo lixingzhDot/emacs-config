@@ -1,0 +1,236 @@
+#+STARTIP: overview
+* Interface Tweak
+#+BEGIN_SRC emacs-lisp 
+(setq inhibit-startup-message t)
+(load-theme 'tango-dark t)
+(fset 'yes-or-no-p `y-or-n-p)
+(global-set-key (kbd "<f4>") 'revert-buffer)
+
+(setq indo-enable-flex-matching t)
+;;(setq ido-everywhere t)
+(ido-mode 1)
+
+(defalias 'list-buffers 'ibuffer)
+;;(defalias 'list-buffers 'ibuffer-other-window)
+
+#+END_SRC
+
+* Useful Tools
+** try package
+try is to install package temporarily. It will be gone after a emacs restart.
+#+BEGIN_SRC emacs-lisp
+(use-package try
+:ensure t)
+
+(use-package which-key
+:ensure t
+:config
+(which-key-mode))
+#+END_SRC
+
+** org-mode package
+#+BEGIN_SRC emacs-lisp
+;; Org-mode stuff
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+** disabled tabbar
+;; introduce a top bar, shows opend buffer. In gui mode, you can clice to switch.
+;;(use-package tabbar
+;;  :ensure t
+;;  :config
+;;  (tarbar-mode 1))
+
+** ace-window
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :ensure t
+  :init
+  (progn
+    (global-set-key [remap other-window] 'ace-window)
+    (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+    ))
+#+END_SRC
+
+** counsel
+#+BEGIN_SRC emacs-lisp
+(use-package counsel
+  :ensure t
+  :bind
+   (("M-x" . counsel-M-x)
+    ("M-y" . counsel-yank-pop)
+    ("C-c r" . counsel-recentf)
+    ("C-x C-f" . counsel-find-file)
+    ("<f1> f" . counsel-describe-function)
+    ("<f1> v" . counsel-describe-variable)
+    ("<f1> l" . counsel-load-library)
+    ("C-h f" . counsel-describe-function)
+    ("C-h v" . counsel-describe-variable)
+    ("C-h l" . counsel-load-library))
+   )
+#+END_SRC
+
+** swiper
+a search tool. 
+#+BEGIN_SRC emacs-lisp
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper)
+	 ("C-r" . swiper)
+	 ("C-c C-r" . ivy-resume)
+	 ("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file))
+  :config
+  (progn
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-display-style 'fancy)
+    (setq enable-recursive-minibuffers t)
+;;    (global-set-key "\C-s" 'swiper)
+;;    (global-set-key (kbd "C-c C-r") 'ivy-resume)
+;;    (global-set-key (kbd "<f6>") 'ivy-resume)
+    (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;;    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+;;    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+;;    (global-set-key (kbd "<f1> l") 'counsel-find-library)
+;;    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+;;    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+;;    (global-set-key (kbd "C-c g") 'counsel-git)
+;;    (global-set-key (kbd "C-c j") 'counsel-git-grep)
+;;    (global-set-key (kbd "C-c k") 'counsel-ag)
+;;    (global-set-key (kbd "C-x l") 'counsel-locate)
+;;    (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+    ))
+#+END_SRC
+
+** auto-completion
+buffer tokens in oppend buffers, and use them as references for auto-completion
+#+BEGIN_SRC emacs-lisp
+;; auto-completion
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)
+    ))
+
+#+END_SRC
+
+** custom-set-variables
+#+BEGIN_SRC emacs-lisp 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (auto-org-md elfeed-org which-key use-package try org-bullets counsel auto-complete ace-window))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 10.0)))))
+
+#+END_SRC
+** reveal.js html slider tool
+DOESN'T WORK!
+   #+BEGIN_SRC emacs-lisp 
+   ;;(use-package ox-reveal
+   ;;:ensure ox-reveal)
+
+;;   (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+;;   (setq org-reveal-mathjax t)
+
+   ;;(use-package htmlize
+   ;;:ensure t)
+   #+END_SRC
+** sr-speedbar
+   #+BEGIN_SRC emacs-lisp
+   (use-package sr-speedbar
+    :ensure t
+    :config
+    (global-set-key (kbd "C-c C-s") 'sr-speedbar-toggle))
+   #+END_SRC
+* Python related
+** python pylint and flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+:ensure t
+:init
+(global-flycheck-mode t))
+#+END_SRC
+*** Jedi more extensive completion for Python
+    #+BEGIN_SRC emacs-lisp
+      (use-package jedi
+	:ensure t
+	:init
+	(add-hook 'python-mode-hook 'jedi:setup)
+	(add-hook 'python-mode-hook 'jedi:ac-setup))
+
+    #+END_SRC
+** yasnippet and elpy
+   #+BEGIN_SRC emacs-lisp 
+     (use-package elpy
+     :ensure t
+     :config
+     (elpy-enable))
+
+;;   should use yasnippet-snippets
+     (use-package yasnippet
+     :ensure t
+     :init
+     (yas-global-mode 1))
+   #+END_SRC
+
+* C++ Related
+** ggtags - disabled
+#+BEGIN_SRC emacs-lisp
+;; tags for code navigation
+(use-package ggtags
+;;:ensure t
+:config
+(add-hook 'c-mode-common-hook
+(lambda ()
+(when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+(ggtags-mode 1))))
+)
+#+END_SRC
+
+* Expand Libraries
+   #+BEGIN_SRC emacs-lisp
+   (org-babel-load-file (expand-file-name "~/.emacs.d/expand.org"))
+
+   #+END_SRC
+* Emacs Customize
+  #+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode t)
+  (setq tab-width 4)
+  (setq c-default-style "linux"
+        c-basic-offset 4)
+  (setq scroll-step 1
+        scroll-conservatively  10000)
+  #+END_SRC
+** matching parathesis
+   #+BEGIN_SRC emacs-lisp
+          ;; By an unknown contributor
+          
+          (global-set-key "%" 'match-paren)
+          
+          (defun match-paren (arg)
+            "Go to the matching paren if on a paren; otherwise insert %."
+            (interactive "p")
+            (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
+                  ((looking-at "\\s)") (forward-char 1) (backward-list 1))
+                  (t (self-insert-command (or arg 1)))))
+   #+END_SRC
+

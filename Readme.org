@@ -1,0 +1,43 @@
+#+STARTUP: showall hidestars
+Emacs Video
+
+- creat a link c-x c-l link [[http://google.com][googleLink]]
+- C-c o open the link
+- C-h k: help info for combined key input.
+- C-x C-e: eval expression.
+  (+ 2 5) ; will show 7 (#o7, #x7, ?\C-g)
+  (setq v 100) ;100 (#o144, #x64, ?d)
+  (+ v v); 200 (#o310, #xc8)
+
+* lesson-4-buffer
+C-x b tab: shows buffers
+installed indo mode, and ibuffer as alias for list-buffers
+
+* Auto complete
+emacs embedded : M-/
+installed auto-complete package
+
+* lesson-theme
+
+* Org init
+use org file to manage the emac init configurations. 
+.emacs load .emacs.d/myinit.org and convert it to .emacs.d/myinit.el.
+
+** Short cut
+<s TAB: 
+   #+BEGIN_SRC 
+   
+   #+END_SRC
+
+* Reveal.js
+code blocks:
+#+BEGIN_SRC emacs-lisp
+(+ 2 3)
+#+END_SRC 
+
+* Run python code
+C-c C-p open python console in emacs
+C-c C-c run block of python code
+use pylint, flycheck and jedi for python code syntax check and code reference/auto-complete.
+
+C-c C-d open function doc
