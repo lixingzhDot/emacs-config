@@ -208,7 +208,7 @@ DOESN'T WORK!
 
 * Expand Libraries
    #+BEGIN_SRC emacs-lisp
-   (org-babel-load-file (expand-file-name "~/.emacs.d/expand.org"))
+   (org-babel-load-file (expand-file-name "~/.emacs.d/emacs-config/expand.org"))
 
    #+END_SRC
 * Emacs Customize
