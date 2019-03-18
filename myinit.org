@@ -234,3 +234,23 @@ DOESN'T WORK!
                   (t (self-insert-command (or arg 1)))))
    #+END_SRC
 
+
+** highlight current word
+   #+BEGIN_SRC emacs-lisp
+   (require 'hi-lock)
+    (defun jpt-toggle-mark-word-at-point ()
+    (interactive)
+    (if hi-lock-interactive-patterns
+        (unhighlight-regexp (car (car hi-lock-interactive-patterns)))
+        (highlight-symbol-at-point)))
+
+    (global-set-key (kbd "C-.") 'jpt-toggle-mark-word-at-point)
+   #+END_SRC
+
+   #+RESULTS:
+   : jpt-toggle-mark-word-at-point
+
+** [TEST] restore previous buffers
+   #+BEGIN_SRC emacs-lisp
+   (desktop-save-mode 1)
+   #+END_SRC
