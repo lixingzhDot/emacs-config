@@ -2,7 +2,7 @@
 * Interface Tweak
 #+BEGIN_SRC emacs-lisp 
 (setq inhibit-startup-message t)
-(load-theme 'tango-dark t)
+(load-theme 'manoj-dark t)
 (fset 'yes-or-no-p `y-or-n-p)
 (global-set-key (kbd "<f4>") 'revert-buffer)
 
@@ -209,11 +209,10 @@ DOESN'T WORK!
 * Expand Libraries
    #+BEGIN_SRC emacs-lisp
    (org-babel-load-file (expand-file-name "~/.emacs.d/emacs-config/expand.org"))
-
    #+END_SRC
 * Emacs Customize
   #+BEGIN_SRC emacs-lisp
-  (setq-default indent-tabs-mode t)
+  (setq-default indent-tabs-mode nil)
   (setq tab-width 4)
   (setq c-default-style "linux"
         c-basic-offset 4)
