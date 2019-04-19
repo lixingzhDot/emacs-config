@@ -13,7 +13,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/emacs-config/myinit.org"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
