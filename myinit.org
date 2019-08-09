@@ -212,6 +212,7 @@ DOESN'T WORK!
    #+END_SRC
 * Emacs Customize
   #+BEGIN_SRC emacs-lisp
+  (add-hook 'find-file-hook (lambda () (setq buffer-read-only t)))
   (setq-default indent-tabs-mode nil)
   (setq tab-width 4)
   (setq c-default-style "linux"
