@@ -55,6 +55,10 @@ try is to install package temporarily. It will be gone after a emacs restart.
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground :height 3.0)))))
     ))
+
+(use-package undo-tree
+  :init
+    (global-undo-tree-mode 1))
 #+END_SRC
 
 ** counsel
@@ -170,14 +174,14 @@ DOESN'T WORK!
 (global-flycheck-mode t))
 #+END_SRC
 *** Jedi more extensive completion for Python
-    #+BEGIN_SRC emacs-lisp
+    BEGIN_SRC emacs-lisp
       (use-package jedi
 	:ensure t
 	:init
 	(add-hook 'python-mode-hook 'jedi:setup)
 	(add-hook 'python-mode-hook 'jedi:ac-setup))
 
-    #+END_SRC
+    END_SRC
 ** yasnippet and elpy
    #+BEGIN_SRC emacs-lisp 
      (use-package elpy
