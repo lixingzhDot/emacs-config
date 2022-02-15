@@ -80,7 +80,8 @@
     (global-set-key (kbd "C-c h o") 'helm-occur)
 
     (global-set-key (kbd "C-c h w") 'helm-wikipedia-suggest)
-    (global-set-key (kbd "C-c h g") 'helm-google-suggest)
+    ;;(global-set-key (kbd "C-c h G") 'helm-google-suggest)
+    (global-set-key (kbd "C-c h g") 'helm-projectile-grep)
 
     (global-set-key (kbd "C-c h x") 'helm-register)
     ;; (global-set-key (kbd "C-x r j") 'jump-to-register)
@@ -137,6 +138,6 @@
       :init
       (helm-projectile-on)
       (setq projectile-completion-system 'helm)
-      (setq projectile-indexing-method 'alien))))
+      (setq projectile-indexing-method 'hybrid))))
 
 (provide 'setup-helm)
