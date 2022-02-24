@@ -13,6 +13,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(load-file "~/.emacs.d/emacs-config/undo-tree-0.7.4.el")
 (org-babel-load-file (expand-file-name "~/.emacs.d/emacs-config/myinit.org"))
 
 (custom-set-variables
